@@ -1,0 +1,16 @@
+[debug] [2025-04-11T00:08:54.937Z] ----------------------------------------------------------------------
+[debug] [2025-04-11T00:08:54.939Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\mauri\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2025-04-11T00:08:54.940Z] CLI Version:   14.1.0
+[debug] [2025-04-11T00:08:54.940Z] Platform:      win32
+[debug] [2025-04-11T00:08:54.940Z] Node Version:  v22.13.0
+[debug] [2025-04-11T00:08:54.940Z] Time:          Thu Apr 10 2025 20:08:54 GMT-0400 (hora estándar de Chile)
+[debug] [2025-04-11T00:08:54.941Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-11T00:08:55.112Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-11T00:08:55.112Z] > authorizing via signed-in user (ronalli56@gmail.com)
+[debug] [2025-04-11T00:08:55.112Z] [iam] checking project pr-comp-react-projects for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-04-11T00:08:55.113Z] Checked if tokens are valid: true, expires at: 1744333507669
+[debug] [2025-04-11T00:08:55.113Z] Checked if tokens are valid: true, expires at: 1744333507669
+[debug] [2025-04-11T00:08:55.114Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/pr-comp-react-projects:testIamPermissions [none]
+[debug] [2025-04-11T00:08:55.114Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/pr-comp-react-projects:testIamPermissions x-goog-quota-user=projects/pr-comp-react-projects
+[debug] [2025-04-11T00:08:55.114Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/pr-comp-react-projects:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
