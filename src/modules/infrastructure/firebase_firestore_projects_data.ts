@@ -4,6 +4,8 @@ import { firebase }                  from "../../../firebase.ts"
 import {
   addDoc,
   collection,
+  setDoc,
+  doc,
   deleteDoc,
   getDocs,
   getFirestore,
@@ -20,7 +22,8 @@ export class FirebaseFirestoreProjectsData implements ProjectsRepository {
 
   async create( project: Project ): Promise<boolean> {
     try {
-      await addDoc( this.db, project )
+      const docRef = doc(this.db, `${project.name}-${project.id}` )
+      await setDoc(docRef, project)
       return true
     }
     catch ( e ) {
@@ -29,20 +32,15 @@ export class FirebaseFirestoreProjectsData implements ProjectsRepository {
     }
   }
 
-  async delete( id: string ): Promise<boolean> {
+  async delete( project: Project ): Promise<boolean> {
     try {
-      const q             = query( this.db, where( "id", "==", id ) )
-      const querySnapshot = await getDocs( q )
-      console.log("querySnapshot", querySnapshot)
-      if ( !querySnapshot.empty ) {
-        querySnapshot.forEach( ( docSnapshot ) => {
-          deleteDoc( docSnapshot.ref )
-        } )
+      const docRef = doc(this.db, `${project.name}-${project.id}` )
+          await deleteDoc( docRef)
         return true
-      }
-      return false
+
     }
     catch ( e ) {
+      console.log( "Error deleting project", e )
       return false
     }
   }
@@ -58,6 +56,7 @@ export class FirebaseFirestoreProjectsData implements ProjectsRepository {
       return projects
     }
     catch ( e ) {
+      console.log( "Error getting projects", e )
       return []
     }
   }

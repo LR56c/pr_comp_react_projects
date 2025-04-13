@@ -4,5 +4,5 @@ export interface Project {
   userName: string;
   name: string;
   description: string;
-  createdAt: Date;
+  createdAt: string;
 }

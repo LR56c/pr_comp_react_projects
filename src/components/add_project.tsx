@@ -16,7 +16,7 @@ export const AddProject: FC = () => {
   const [name, setName]               = useState( "" )
   const [description, setDescription] = useState( "" )
   const [isTouched, setIsTouched] = useState(false)
-  const [isLoading, setIsloading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const projects                      = useProjects()
 
   const { isFormValid, getFailedRulesInField } = useValidation( {
@@ -29,12 +29,15 @@ export const AddProject: FC = () => {
 
   const handleSubmit = async ( e: React.FormEvent ) => {
     e.preventDefault()
+    if(!isTouched){
+      setIsTouched(true)
+    }
     if ( !isFormValid ) {
       return
     }
-    setIsloading( true )
+    setIsLoading( true )
     const result = await projects.addProject( name, description )
-    setIsloading( false )
+    setIsLoading( false )
     if(!result){
       alert("Error al crear el proyecto. Intente nuevamente")
       return
@@ -87,7 +90,7 @@ export const AddProject: FC = () => {
                 key={ index }>{ parseRuleMessage( error ) }</span>
         ) ) : null}
       </div>
-      <button disabled={isLoading} className="bg-slate-300 font-medium rounded py-3 px-6 cursor-pointer"
+      <button disabled={isLoading} className="bg-slate-300 font-medium rounded py-3 px-6 cursor-pointer disabled:cursor-not-allowed disabled:bg-slate-50"
               type="submit">Enviar
       </button>
     </form>

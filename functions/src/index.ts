@@ -9,20 +9,27 @@
 
 import {onCall} from "firebase-functions/v2/https";
 // import * as logger       from "firebase-functions/logger"
-// import * as admin from "firebase-admin"
+import * as admin from "firebase-admin";
 // import * as functions from "firebase-functions"
 
 // https://firebase.google.com/docs/functions/typescript
 
-// export const helloWorld = onRequest( ( request, response ) => {
-//   logger.info( "Hello logs!", { structuredData: true } )
-//   response.send( "Hello from Firebase!" )
-// } )
-
+admin.initializeApp();
 interface RemoveMessageData {
-  messageId: string;
+  id: string;
+  name: string;
 }
-export const removeMessage = onCall<RemoveMessageData>( ( data, context ) => {
-  const {messageId} = data.data;
-  return {success: `ok: ${ messageId }`};
-} );
+
+export const removeMessage = onCall<RemoveMessageData>(
+  async ( data, context ) => {
+    try {
+      const {id, name} = data.data;
+      await admin.firestore()
+        .collection( "projects" )
+        .doc( `${ name }-${ id }` )
+        .delete();
+      return {status: "ok"};
+    } catch ( e ) {
+      return {status: "error"};
+    }
+  } );

@@ -1,3 +1,4 @@
+import { log } from 'fp-ts/lib/Console';
 import { useState } from "react"
 import { Project }  from "../modules/domain/project.ts"
 import axios        from "axios"
@@ -21,31 +22,31 @@ export function useProjects() {
       return false
     }
     const json             = jsonResponse.data
-    const id               = json.id
-    const userId           = json.userId
+    const id               = json.id.toString()
+    const userId           = json.userId.toString()
     const userName         = json.title
     const project: Project = {
       name,
       description,
-      createdAt: new Date(),
+      createdAt: new Date().toISOString(),
       userName,
       userId,
       id
     }
+
     return await firestoreRepo.create( project )
   }
 
   const getProjects = async () => {
     const projects = await firestoreRepo.getAll()
-    console.log( "projects", projects )
     setProjects( projects )
   }
 
-  const removeProject = async ( id: string ) => {
-    // const result = await functionsRepo.delete( id )
-    const result = await firestoreRepo.delete( id )
+  const removeProject = async ( project : Project ) => {
+    const result = await functionsRepo.delete( project )
+    // const result = await firestoreRepo.delete( project )
     if ( result ) {
-      setProjects( projects.filter( project => project.id !== id ) )
+      setProjects( projects.filter( p => p.id !== project.id ) )
     }
   }
 
