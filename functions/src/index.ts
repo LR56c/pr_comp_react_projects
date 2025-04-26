@@ -10,7 +10,8 @@
 import {onCall} from "firebase-functions/v2/https";
 // import * as logger       from "firebase-functions/logger"
 import * as admin from "firebase-admin";
-// import * as functions from "firebase-functions"
+// impo
+// rt * as functions from "firebase-functions"
 
 // https://firebase.google.com/docs/functions/typescript
 
@@ -20,7 +21,8 @@ interface RemoveMessageData {
   name: string;
 }
 
-export const removeMessage = onCall<RemoveMessageData>(
+export const removeMessage
+               = onCall<RemoveMessageData>(
   async ( data, context ) => {
     try {
       const {id, name} = data.data;
